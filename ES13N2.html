@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let coureScore = { java: 80, php: 50, es: 90};
+        let hander = {
+            //T1
+            has:function (target,key) {
+                if (Object.keys(target).find(i => i.startsWith(key))) return true;
+                else return false;
+            },
+            //T2
+            get:function (target, key) {
+                let r = Object.keys(target).find(i => i.startsWith(key));
+                if (r) return r;
+                else throw new TypeError(`没有以${key}开头的属性`);
+            }
+        }
+        //T3
+        let courePx = new Proxy(coureScore,hander);
+        function getScore(name)
+        {
+            if(name in courePx)
+               console.log(`${courePx[name]}成绩为${coureScore[courePx[name]]}`);
+            else
+               console.log(`没有以${name}开头的属性`); 
+        }
+        getScore('jav');getScore('jsp');
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let phonePrice = { Mate: 4999, iPhoneXR: 4899, OnePlus: 3999 };
+        let hander = {
+            set(target, key, value) {
+                let result = Object.keys(target).find(i => i.startsWith(key));
+                if (result)
+                //T1
+                    return Reflect.set(target, result, value);
+                else
+                //T2
+                    return Reflect.set(target, key, value);
+            }
+        }
+        let phonePx = new Proxy(phonePrice, hander);;
+        phonePx.iPh=4888;
+        phonePx.GalaxyA90=4499;
+        console.log(phonePx);
+    </script>
+</body>
+</html>

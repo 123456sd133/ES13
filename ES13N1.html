@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let url1 = "http://127.0.0.1:118";
+        let url2 = `${url1}/insure`;
+        async function getInsure(id) {
+            try {
+                let emp = await fetch(`${url1}/${id}`);
+                //T1
+                emp = await emp.json();
+                //T2
+                let insure = await fetch(`${url2}/${emp.insureId}`);
+                //T3
+                insure = await insure.json();
+                insure.ename = emp.ename;
+                console.log(insure);
+            }
+            catch{
+                console.log(`工号${id}不正确`);
+            }
+        }
+        getInsure(1023);getInsure(1003);
+    </script>
+</body>
+</html>
